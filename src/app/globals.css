@@ -1,21 +1,379 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    font-family: 'Cairo', Arial, sans-serif;
   }
-}
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
+  @layer base {
+    /* تنسيق التحديد */
+    ::selection {
+      @apply bg-blue-500/30 text-blue-900;
+    }
+    
+    ::-moz-selection {
+      @apply bg-blue-500/30 text-blue-900;
+    }
+
+    :root {
+
+      --move-x: 0px;
+  --move-y: 0px;
+
+      /* الألوان الأساسية */
+      --background: 217 65% 98%;
+      --foreground: 217 65% 12%;
+      
+      /* ألوان البطاقات */
+      --card: 0 0% 100%;
+      --card-foreground: 217 65% 12%;
+      --card-hover: 217 65% 96%;
+      
+      /* ألوان القوائم المنبثقة */
+      --popover: 0 0% 100%;
+      --popover-foreground: 217 65% 12%;
+      
+      /* الألوان الرئيسية */
+      --primary: 217 91% 60%;
+      --primary-hover: 217 91% 55%;
+      --primary-active: 217 91% 50%;
+      --primary-foreground: 0 0% 100%;
+      
+      /* الألوان الثانوية */
+      --secondary: 217 25% 85%; /* تغيير من 95% إلى 85% لجعله أغمق */
+    --secondary-hover: 217 25% 80%;
+    --secondary-active: 217 25% 75%;
+    --secondary-foreground: 217 65% 12%;
+      
+      /* ألوان التأكيد */
+      --accent: 215 90% 60%;
+      --accent-hover: 215 90% 55%;
+      --accent-active: 215 90% 50%;
+      --accent-foreground: 0 0% 100%;
+      
+      /* ألوان الحالة */
+      --success: 142 72% 29%;
+      --success-hover: 142 72% 26%;
+      --success-foreground: 0 0% 100%;
+      
+      --warning: 38 92% 50%;
+      --warning-hover: 38 92% 45%;
+      --warning-foreground: 0 0% 100%;
+      
+      --info: 199 89% 48%;
+      --info-hover: 199 89% 43%;
+      --info-foreground: 0 0% 100%;
+      
+      --destructive: 0 84% 60%;
+      --destructive-hover: 0 84% 55%;
+      --destructive-foreground: 0 0% 100%;
+      
+      /* ألوان الواجهة */
+      --muted: 217 25% 95%;
+      --muted-foreground: 217 25% 45%;
+      
+      /* ألوان العناصر */
+      --border: 217 35% 75%; /* تغيير اللون ليكون أغمق */
+      --input: 217 35% 75%;
+      --ring: 217 91% 60%;
+      
+      /* نصف قطر الحواف */
+      --radius: 0.875rem;
+    }
+
+    .dark {
+      /* الألوان الأساسية */
+      --background: 217 65% 4%;
+      --foreground: 217 65% 98%;
+      
+      /* ألوان البطاقات */
+      --card: 217 65% 6%;
+      --card-foreground: 217 65% 98%;
+      --card-hover: 217 35% 90%;
+      
+      /* ألوان القوائم المنبثقة */
+      --popover: 217 65% 6%;
+      --popover-foreground: 217 65% 98%;
+      
+      /* الألوان الرئيسية */
+      --primary: 217 91% 65%;
+      --primary-hover: 217 91% 60%;
+      --primary-active: 217 91% 55%;
+      --primary-foreground: 217 65% 4%;
+      
+      /* الألوان الثانوية */
+      --secondary: 217 25% 15%;
+      --secondary-hover: 217 25% 12%;
+      --secondary-active: 217 25% 10%;
+      --secondary-foreground: 217 65% 98%;
+      
+      /* ألوان التأكيد */
+      --accent: 215 90% 65%;
+      --accent-hover: 215 90% 60%;
+      --accent-active: 215 90% 55%;
+      --accent-foreground: 217 65% 4%;
+      
+      /* ألوان الحالة */
+      --success: 142 72% 35%;
+      --success-hover: 142 72% 32%;
+      --success-foreground: 217 65% 4%;
+      
+      --warning: 38 92% 60%;
+      --warning-hover: 38 92% 55%;
+      --warning-foreground: 217 65% 4%;
+      
+      --info: 199 89% 58%;
+      --info-hover: 199 89% 53%;
+      --info-foreground: 217 65% 4%;
+      
+      --destructive: 0 84% 65%;
+      --destructive-hover: 0 84% 60%;
+      --destructive-foreground: 217 65% 4%;
+      
+      /* ألوان الواجهة */
+      --muted: 217 25% 90%;
+      --muted-foreground: 217 25% 40%;
+      
+      /* ألوان العناصر */
+      --border: 217 25% 15%;
+      --input: 217 25% 15%;
+      --ring: 217 91% 65%;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0);
+      }
+      50% {
+        transform: translate(20px, -20px);
+      }
+    }
+    
+    /* حركة النقاط الدائرية */
+    @keyframes pulse-size {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+    
+    /* تأثير التموج للدوائر */
+    @keyframes ripple {
+      0% {
+        transform: scale(0.8);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+    
+    /* تطبيق الخصائص الأساسية */
+    * {
+      @apply border-border selection:bg-blue-500/30 selection:text-foreground;
+    }
+    
+    body {
+      @apply bg-background text-foreground antialiased transition-colors duration-300;
+    }
+  }
+
+  @layer components {
+    /* تنسيق عناصر الإدخال */
+    .input-base {
+      @apply block w-full rounded-md border border-input bg-background px-4 py-2
+            text-foreground shadow-sm outline-none
+            placeholder:text-muted-foreground
+            focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+            disabled:cursor-not-allowed disabled:opacity-50
+            transition duration-200;
+    }
+
+    /* تنسيق الأزرار */
+    .btn-base {
+      @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium
+            shadow-sm transition-all duration-200
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+            disabled:cursor-not-allowed disabled:opacity-50
+            active:translate-y-px;
+    }
+
+    .btn-primary {
+      @apply btn-base bg-primary text-primary-foreground
+            hover:bg-primary-hover active:bg-primary-active
+            focus-visible:ring-primary;
+    }
+
+    .btn-secondary {
+      @apply btn-base bg-secondary text-secondary-foreground
+            hover:bg-secondary-hover active:bg-secondary-active
+            focus-visible:ring-secondary;
+    }
+
+    .btn-accent {
+      @apply btn-base bg-accent text-accent-foreground
+            hover:bg-accent-hover active:bg-accent-active
+            focus-visible:ring-accent;
+    }
+
+    .btn-outline {
+      @apply btn-base border-2 border-input bg-background
+            hover:bg-muted hover:text-foreground
+            focus-visible:ring-primary;
+    }
+
+    /* تنسيق البطاقات */
+    .btn-outline {
+      @apply btn-base border-2 border-border/80 bg-background
+            hover:bg-muted hover:text-foreground
+            focus-visible:ring-primary;
+    }
+
+    .card-base {
+      @apply rounded-lg border border-border/80 bg-card p-6 
+            shadow-sm transition duration-200 
+            hover:shadow-md hover:border-primary/40;
+    }
+
+
+    .card-header {
+      @apply -mx-6 -mt-6 mb-6 border-b border-border px-6 py-4
+            bg-muted/50;
+    }
+
+    .card-title {
+      @apply text-xl font-semibold text-card-foreground;
+    }
+
+    .card-footer {
+      @apply -mx-6 -mb-6 mt-6 border-t border-border px-6 py-4
+            bg-muted/50;
+    }
+
+    /* تنسيق التبويبات */
+    .tabs-base {
+      @apply rounded-lg bg-muted p-1 shadow-sm;
+    }
+
+    .tab-trigger {
+      @apply rounded-md px-3 py-2 text-sm font-medium transition-colors
+            text-muted-foreground
+            hover:bg-background/80 hover:text-foreground
+            data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm;
+    }
+  }
+
+  @layer utilities {
+    /* تأثيرات الشاشة الزجاجية */
+    .glass-effect {
+      @apply backdrop-blur-md bg-background/80
+            supports-[backdrop-filter]:bg-background/60
+            border border-border/50
+            shadow-lg;
+    }
+
+    /* تأثير التحديد */
+    .selection-effect {
+      @apply selection:bg-blue-500/30 selection:text-foreground
+            dark:selection:bg-blue-400/30;
+    }
+
+    /* تأثير التركيز */
+    .focus-ring {
+      @apply focus-visible:outline-none focus-visible:ring-2 
+            focus-visible:ring-ring focus-visible:ring-offset-2
+            focus-visible:ring-offset-background;
+    }
+
+    /* تأثير التحميل */
+    .shimmer {
+      @apply animate-pulse bg-muted/50;
+    }
+
+    /* تأثير الحركة للبطاقات */
+    .card-float {
+      @apply transition duration-300 ease-in-out
+            hover:translate-y-[-2px] hover:shadow-lg;
+    }
+
+    /* تنسيق شريط التمرير */
+    .scrollbar-styled {
+      @apply scrollbar-thin scrollbar-track-muted 
+            scrollbar-thumb-primary/60 hover:scrollbar-thumb-primary/80;
+    }
+  }
+
+  /* التحريك والتأثيرات */
+  @keyframes slideIn {
+    from {
+      transform: translateY(0.5rem);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.2s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  /* تأثير التموج للأزرار */
+  .btn-ripple {
+    @apply relative overflow-hidden;
+  }
+
+  .btn-ripple::after {
+    @apply content-[''] absolute top-1/2 left-1/2 w-5 h-5
+          -translate-x-1/2 -translate-y-1/2
+          bg-white/30 rounded-full opacity-0
+          pointer-events-none;
+  }
+
+  .btn-ripple:active::after {
+    animation: ripple 0.7s ease-out;
+  }
+
+  @keyframes ripple {
+    0% {
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(4);
+      opacity: 0;
+    }
+  }
