@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, { useEffect, useCallback, memo } from 'react';
 import { FileCode2, Settings2, LayoutTemplate, Download, Wand2 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
-import { BasicInfo, DiagramSettings, DiagramType, DiagramDirection, CurveStyle } from '@/utils/types';
+import { BasicInfo, DiagramSettings, DiagramType } from '@/utils/types';
 import { diagramConfigs } from '@/utils/diagram-configs';
 import { DiagramTips } from './diagram-tips';
 
@@ -88,7 +89,6 @@ const BasicInfoContent = memo(({ basicInfo, onBasicInfoChange }: BasicInfoProps)
 const DiagramSettingsContent = memo(({ 
   diagramSettings, 
   onSettingsChange,
-  selectedDiagramType,
   config 
 }: DiagramSettingsProps) => (
   <div className="space-y-6">
@@ -273,7 +273,7 @@ export const DiagramMainContent: React.FC<DiagramMainContentProps> = ({
     if (needsUpdate) {
       setDiagramSettings(updatedSettings);
     }
-  }, [selectedDiagramType]); // تبعية فقط لنوع المخطط المحدد
+  }, [diagramSettings, selectedDiagramType, setDiagramSettings]); // تبعية فقط لنوع المخطط المحدد
 
   const config = diagramConfigs[selectedDiagramType];
 

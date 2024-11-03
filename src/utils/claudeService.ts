@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Anthropic } from '@anthropic-ai/sdk';
 
 import { DiagramType, DiagramSettings, BasicInfo } from './types';
