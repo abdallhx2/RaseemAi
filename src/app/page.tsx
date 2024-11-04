@@ -18,7 +18,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
-import StatsWidget from '@/components/analytics';
 
 export default function DiagramPage() {
   const [diagramType, setDiagramType] = useState<DiagramType>('flowchart');
@@ -59,7 +58,6 @@ export default function DiagramPage() {
       [field]: value
     }));
   }, []);
-
 
   const handleGenerateDiagram = async () => {
     setLoading(true);
@@ -112,30 +110,99 @@ export default function DiagramPage() {
     }
   };
 
-  
   return (
-    <div className="">
-      <div className="container mx-auto py-8 px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-2 bg-clip-text  ">
-            رسيم مولد المخططات 
-          </h1>
-          <p className="text-muted-foreground">
-            قم بإنشاء مخططات احترافية بسهولة باستخدام الذكاء الاصطناعي
-          </p>
+    <div className="min-h-screen">
+      <div className="container mx-auto py-4 px-2 sm:py-8 sm:px-4">
+        {/* Header Section */}
+        <div dir="rtl" className="text-center mb-6 sm:mb-12">
+      <h1 className="text-3xl sm:text-4xl font-bold mb-2">
+        مولد المخططات {" "}
+        <span className="text-primary inline-block relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all after:duration-500 hover:scale-105 transition-transform duration-300">
+          رسيم
+        </span>
+      </h1>
+      <p className="text-sm sm:text-base text-gray-600">
+        قم بإنشاء مخططات احترافية بسهولة باستخدام الذكاء الاصطناعي
+      </p>
+    </div>
+        {/* Mobile Accordion for Settings */}
+        <div className="block lg:hidden mb-6">
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="basic-info">
+              <AccordionTrigger className="text-lg font-semibold">
+                <Code2 className="w-5 h-5 ml-2" />
+                معلومات أساسية
+              </AccordionTrigger>
+              <AccordionContent>
+                <Card className="border-0 shadow-none">
+                  <CardContent className="p-2">
+                    <BasicInfoComponent
+                      basicInfo={basicInfo}
+                      handleBasicInfoChange={handleBasicInfoChange}
+                    />
+                  </CardContent>
+                </Card>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="diagram-type">
+              <AccordionTrigger className="text-lg font-semibold">
+                <svg 
+                  className="w-5 h-5 ml-2" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
+                  />
+                </svg>
+                نوع المخطط
+              </AccordionTrigger>
+              <AccordionContent>
+                <Card className="border-0 shadow-none">
+                  <CardContent className="p-2">
+                    <DiagramSidebar
+                      diagramType={diagramType}
+                      setDiagramType={setDiagramType}
+                    />
+                  </CardContent>
+                </Card>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="settings">
+              <AccordionTrigger className="text-lg font-semibold">
+                <Settings2 className="w-5 h-5 ml-2" />
+                إعدادات المخطط
+              </AccordionTrigger>
+              <AccordionContent>
+                <Card className="border-0 shadow-none">
+                  <CardContent className="p-2">
+                    <DiagramSettings
+                      diagramSettings={diagramSettings}
+                      handleSettingsChange={handleSettingsChange}
+                      selectedDiagramType={diagramType}
+                      theme={theme}
+                      setTheme={setTheme}
+                    />
+                  </CardContent>
+                </Card>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
 
-        {/* <div className="mb-8">
-        <StatsWidget />
-      </div> */}
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Sidebar Right */}
-          <aside className="lg:col-span-3 space-y-6">
-            {/* Basic Info Card */}
-            <Card className="transition-all duration-300 hover:shadow-lg border-border bg-card">
+        {/* Desktop Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6">
+          {/* Sidebar Right - Desktop Only */}
+          <aside className="hidden lg:block lg:col-span-3 space-y-6">
+            <Card className="transition-all duration-300 hover:shadow-lg">
               <CardContent className="p-4">
-                <div className="flex items-center gap-2 mb-4 text-lg font-semibold ">
+                <div className="flex items-center gap-2 mb-4 text-lg font-semibold">
                   <Code2 className="w-5 h-5" />
                   معلومات أساسية
                 </div>
@@ -146,8 +213,7 @@ export default function DiagramPage() {
               </CardContent>
             </Card>
 
-            {/* Diagram Type Card */}
-            <Card className="transition-all duration-300 hover:shadow-lg border-border bg-card">
+            <Card className="transition-all duration-300 hover:shadow-lg">
               <CardContent className="p-4">
                 <div className="flex items-center gap-2 mb-4">
                   <svg 
@@ -163,9 +229,9 @@ export default function DiagramPage() {
                       d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
                     />
                   </svg>
-                  <h3 className="text-lg font-semibold ">نوع المخطط</h3>
+                  <h3 className="text-lg font-semibold">نوع المخطط</h3>
                 </div>
-                <div className="border-t border-border pt-4">
+                <div className="border-t pt-4">
                   <DiagramSidebar
                     diagramType={diagramType}
                     setDiagramType={setDiagramType}
@@ -173,28 +239,25 @@ export default function DiagramPage() {
                 </div>
               </CardContent>
             </Card>
-
-          
           </aside>
 
           {/* Main Content */}
           <main className="lg:col-span-6">
-            <Card className="transition-all duration-300 border-border bg-card">
-              <CardContent className="p-6">
-                <div className="space-y-6">
-                  <div className="relative group">
+            <Card className="transition-all duration-300">
+              <CardContent className="p-4 sm:p-6">
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="relative group min-h-[200px]">
                     <Preview
                       loading={loading}
                       generatedSvg={generatedSvg}
                       onDownload={handleDownload}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
-                  <div className="flex gap-4">
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
                     <Button
                       onClick={handleGenerateDiagram}
                       disabled={loading}
-                      className="flex-1 bg-gradient-to-r from-primary to-accent hover:from-primary-hover hover:to-accent-hover text-primary-foreground transition-all duration-300 hover:scale-105"
+                      className="flex-1 bg-gradient-to-r from-primary to-accent hover:from-primary-hover hover:to-accent-hover text-primary-foreground transition-all duration-300"
                     >
                       <Wand2 className="w-5 h-5 ml-2" />
                       {loading ? 'جاري الإنشاء...' : 'إنشاء المخطط'}
@@ -202,7 +265,7 @@ export default function DiagramPage() {
                     {generatedSvg && (
                       <Button
                         onClick={handleDownload}
-                        className="bg-gradient-to-r from-success to-success-hover hover:from-success-hover hover:to-success text-success-foreground transition-all duration-300 hover:scale-105"
+                        className="w-full sm:w-auto bg-gradient-to-r from-success to-success-hover hover:from-success-hover hover:to-success text-success-foreground transition-all duration-300"
                       >
                         <Download className="w-5 h-5" />
                       </Button>
@@ -213,9 +276,9 @@ export default function DiagramPage() {
             </Card>
           </main>
 
-          {/* Sidebar Left */}
-          <aside className="lg:col-span-3">
-            <Card className="sticky top-4 transition-all duration-300 hover:shadow-lg border-border bg-card">
+          {/* Sidebar Left - Desktop Only */}
+          <aside className="hidden lg:block lg:col-span-3">
+            <Card className="sticky top-4 transition-all duration-300 hover:shadow-lg">
               <CardContent className="p-4">
                 <Accordion type="single" collapsible defaultValue="settings">
                   <AccordionItem value="settings" className="border-none">

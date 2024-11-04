@@ -16,7 +16,7 @@ export function NavigationBar() {
           className="flex items-center gap-2 lg:gap-3 hover:opacity-80 transition-opacity"
         >
           <Activity className="h-6 w-6 text-primary" />
-          <span className="font-bold sm:inline-block text-lg">Raseem</span>
+          <span className="font-bold sm:inline-block text-lg">Raseem Ai</span>
         </Link>
 
         {/* الأزرار */}

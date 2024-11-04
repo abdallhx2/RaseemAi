@@ -91,13 +91,14 @@ export default function AboutPage() {
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 to-primary/10 animate-pulse" />
               <div className="absolute inset-2 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 dark:from-blue-900/20 dark:to-blue-900/10" />
               <div className="absolute inset-2 rounded-full overflow-hidden border-2 border-primary/20">
-                <Image
-                  src="/12.jpg"
-                  alt="عبدالله الحسني"
-                  fill
-                  className="rounded-full object-cover transition-transform duration-300 hover:scale-110"
-                  priority
-                />
+              <Image
+  src="/12.jpg"
+  alt="عبدالله الحسني"
+  width={300}
+  height={300}
+  className="rounded-full object-cover transition-transform duration-300 hover:scale-110"
+  priority
+/>
               </div>
             </div>
           </div>
