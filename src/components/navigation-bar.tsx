@@ -16,13 +16,13 @@ export function NavigationBar() {
           className="flex items-center gap-2 lg:gap-3 hover:opacity-80 transition-opacity"
         >
           <Activity className="h-6 w-6 text-primary" />
-          <span className="font-bold sm:inline-block text-lg">رسيم</span>
+          <span className="font-bold sm:inline-block text-lg">Raseem</span>
         </Link>
 
         {/* الأزرار */}
         <div className="flex items-center gap-3">
       
-        <Link href="/about">
+        <Link href="/about-page">
   <Button 
       variant="outline"
 

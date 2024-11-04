@@ -37,6 +37,46 @@ const experienceCards = [
 
 const skills = ["Next.js", "Dart", "TypeScript", "Flutter"];
 
+const SocialLinks = () => {
+  const socialLinks = [
+    { 
+      icon: Github, 
+      label: "GitHub",
+      href: "https://github.com/yourusername"
+    },
+    { 
+      icon: Twitter, 
+      label: "Twitter",
+      href: "https://twitter.com/yourusername" 
+    },
+    { 
+      icon: Linkedin, 
+      label: "LinkedIn",
+      href: "https://linkedin.com/in/yourusername"
+    },
+    { 
+      icon: Mail, 
+      label: "البريد الإلكتروني",
+      href: "mailto:your.email@example.com"
+    }
+  ];
+
+  return (
+    <div className="flex flex-wrap justify-center gap-4">
+      {socialLinks.map(({ icon: Icon, label, href }, index) => (
+        <Button 
+          key={index}
+          variant="ghost" 
+          className="gap-2 transition-transform hover:scale-105"
+        >
+          <Icon className="w-4 h-4" />
+          {label}
+        </Button>
+      ))}
+    </div>
+  );
+};
+
 export default function AboutPage() {
   return (
     <main className="min-h-screen py-10">
@@ -88,16 +128,7 @@ export default function AboutPage() {
               أسعى دائماً لتطوير حلول مبتكرة وفعالة تجمع بين الأداء العالي والتصميم السلس.
             </p>
 
-            <div className="flex justify-center gap-4">
-              <Button variant="default" className="gap-2 transition-transform hover:scale-105">
-                <Mail className="w-4 h-4" />
-                تواصل معي
-              </Button>
-              <Button variant="outline" className="gap-2 transition-transform hover:scale-105">
-                <Github className="w-4 h-4" />
-                GitHub
-              </Button>
-            </div>
+         
           </div>
         </section>
 
@@ -133,26 +164,29 @@ export default function AboutPage() {
 
         {/* وسائل التواصل */}
         <section>
-          <Card className="p-6 bg-primary/5 hover:bg-primary/10 transition-colors">
-            <div className="flex flex-wrap justify-center gap-4">
-              {[
-                { icon: Github, label: "GitHub" },
-                { icon: Twitter, label: "Twitter" },
-                { icon: Linkedin, label: "LinkedIn" },
-                { icon: Mail, label: "البريد الإلكتروني" }
-              ].map(({ icon: Icon, label }, index) => (
-                <Button 
-                  key={index}
-                  variant="ghost" 
-                  className="gap-2 transition-transform hover:scale-105"
-                >
-                  <Icon className="w-4 h-4" />
-                  {label}
-                </Button>
-              ))}
-            </div>
-          </Card>
-        </section>
+  <Card className="p-6 bg-primary/5 hover:bg-primary/10 transition-colors">
+    <div className="flex flex-wrap justify-center gap-4">
+      {[
+        { icon: Github, label: "GitHub", href: "https://github.com/abdallhx2" },
+        { icon: Twitter, label: "X", href: "https://x.com/01DMXX" },
+        { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/abdullahx2" },
+        { icon: Mail, label: "البريد الإلكتروني", href: "mailto:3bdallhx2@gmail.com" }
+      ].map(({ icon: Icon, label, href }, index) => (
+        <Button 
+          key={index}
+          variant="ghost" 
+          className="gap-2 transition-transform hover:scale-105"
+          asChild
+        >
+          <a href={href} target="_blank" rel="noopener noreferrer">
+            <Icon className="w-4 h-4" />
+            {label}
+          </a>
+        </Button>
+      ))}
+    </div>
+  </Card>
+</section>
       </div>
     </main>
   );

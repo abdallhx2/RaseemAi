@@ -1,20 +1,31 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-"use client"
-import React, { useState } from 'react';
-import { DiagramSidebar } from '../components/Diagrams/DiagramSidebar';
-import { DiagramMainContent } from '../components/Diagrams/DiagramMainContent';
+'use client'
+
+import React, { useCallback, useState } from 'react';
+import { DiagramSidebar } from '@/components/Diagrams/sidebar';
+import { DiagramSettings } from '@/components/Diagrams/diagram-settings';
 import { toast } from '@/hooks/use-toast';
 import { generateDiagram } from '@/utils/claudeService';
 import { renderMermaidDiagram } from '@/utils/mermaidConfig';
-import { BasicInfo, DiagramSettings, DiagramType, MermaidTheme } from '@/utils/types';
-import { Wand2, FileCode2, Settings2, Sparkles, Boxes, CircuitBoard, Network } from 'lucide-react';
+import { BasicInfo, DiagramSettings as DiagramSettingsType, DiagramType, MermaidTheme } from '@/utils/types';
+import { Wand2, Code2, Settings2, Download } from 'lucide-react';
+import { Preview } from '@/components/Diagrams/perview';
+import { Button } from '@/components/ui/button';
+import { BasicInfoComponent } from '@/components/Diagrams/BasicInfo';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Card, CardContent } from "@/components/ui/card";
+import StatsWidget from '@/components/analytics';
 
-const DiagramBuilder = () => {
-  // State Management
+export default function DiagramPage() {
   const [diagramType, setDiagramType] = useState<DiagramType>('flowchart');
   const [theme, setTheme] = useState<MermaidTheme>('default');
   const [loading, setLoading] = useState(false);
   const [generatedSvg, setGeneratedSvg] = useState('');
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   
   const [basicInfo, setBasicInfo] = useState<BasicInfo>({
     systemName: '',
@@ -22,7 +33,7 @@ const DiagramBuilder = () => {
     version: '1.0',
   });
 
-  const [diagramSettings, setDiagramSettings] = useState<DiagramSettings>({
+  const [diagramSettings, setDiagramSettings] = useState<DiagramSettingsType>({
     direction: 'TB',
     fontSize: 14,
     padding: 15,
@@ -35,7 +46,21 @@ const DiagramBuilder = () => {
     defaultLinkColor: '#000000',
   });
 
-  // Handlers
+  const handleBasicInfoChange = useCallback((field: keyof BasicInfo, value: string) => {
+    setBasicInfo(prevInfo => ({
+      ...prevInfo,
+      [field]: value
+    }));
+  }, []);
+
+  const handleSettingsChange = useCallback((field: keyof DiagramSettingsType, value: unknown) => {
+    setDiagramSettings(prevSettings => ({
+      ...prevSettings,
+      [field]: value
+    }));
+  }, []);
+
+
   const handleGenerateDiagram = async () => {
     setLoading(true);
     try {
@@ -49,15 +74,14 @@ const DiagramBuilder = () => {
 
       setGeneratedSvg(svg);
       toast({
-        title: "تم إنشاء المخطط بنجاح ✨",
+        title: "تم إنشاء المخطط بنجاح",
         description: "يمكنك الآن تحميل المخطط أو تعديل الإعدادات",
       });
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'فشل في إنشاء المخطط';
       toast({
         variant: "destructive",
         title: "حدث خطأ",
-        description: errorMessage,
+        description: error instanceof Error ? error.message : 'فشل في إنشاء المخطط',
       });
     } finally {
       setLoading(false);
@@ -76,7 +100,7 @@ const DiagramBuilder = () => {
       document.body.removeChild(element);
 
       toast({
-        title: "تم تحميل المخطط ✅",
+        title: "تم تحميل المخطط",
         description: "تم حفظ المخطط بصيغة SVG",
       });
     } catch (error) {
@@ -88,85 +112,151 @@ const DiagramBuilder = () => {
     }
   };
 
-
+  
   return (
     <div className="">
-    {/* أيقونات الخلفية */}
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* الأيقونات اليمنى */}
-      <div className="absolute left-10 top-20">
-        <FileCode2 className="w-8 h-8 text-primary/20 animate-pulse" />
-      </div>
-      <div className="absolute left-32 top-40">
-        <CircuitBoard className="w-6 h-6 text-accent/20 animate-pulse delay-300" />
-      </div>
-      <div className="absolute left-20 top-60">
-        <Network className="w-10 h-10 text-info/20 animate-pulse delay-500" />
-      </div>
+      <div className="container mx-auto py-8 px-4">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold mb-2 bg-clip-text  ">
+            رسيم مولد المخططات 
+          </h1>
+          <p className="text-muted-foreground">
+            قم بإنشاء مخططات احترافية بسهولة باستخدام الذكاء الاصطناعي
+          </p>
+        </div>
 
-      {/* الأيقونات اليسرى */}
-      <div className="absolute right-12 top-24">
-        <Settings2 className="w-7 h-7 text-primary/20 animate-pulse delay-200" />
-      </div>
-      <div className="absolute right-28 top-48">
-        <Boxes className="w-5 h-5 text-accent/20 animate-pulse delay-400" />
-      </div>
-      <div className="absolute right-16 top-72">
-        <Wand2 className="w-9 h-9 text-info/20 animate-pulse delay-600" />
+        {/* <div className="mb-8">
+        <StatsWidget />
+      </div> */}
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Sidebar Right */}
+          <aside className="lg:col-span-3 space-y-6">
+            {/* Basic Info Card */}
+            <Card className="transition-all duration-300 hover:shadow-lg border-border bg-card">
+              <CardContent className="p-4">
+                <div className="flex items-center gap-2 mb-4 text-lg font-semibold text-primary">
+                  <Code2 className="w-5 h-5" />
+                  معلومات أساسية
+                </div>
+                <BasicInfoComponent
+                  basicInfo={basicInfo}
+                  handleBasicInfoChange={handleBasicInfoChange}
+                />
+              </CardContent>
+            </Card>
+
+            {/* Diagram Type Card */}
+            <Card className="transition-all duration-300 hover:shadow-lg border-border bg-card">
+              <CardContent className="p-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <svg 
+                    className="w-5 h-5 text-accent" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
+                    />
+                  </svg>
+                  <h3 className="text-lg font-semibold text-primary">نوع المخطط</h3>
+                </div>
+                <div className="border-t border-border pt-4">
+                  <DiagramSidebar
+                    diagramType={diagramType}
+                    setDiagramType={setDiagramType}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Floating Help Button */}
+            <button className="fixed bottom-6 right-6 p-3 bg-primary hover:bg-primary-hover text-primary-foreground rounded-full shadow-lg transition-all duration-300 hover:scale-110 group">
+              <svg 
+                className="w-6 h-6" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span className="absolute right-full mr-2 bg-popover text-popover-foreground text-sm py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                مساعدة
+              </span>
+            </button>
+          </aside>
+
+          {/* Main Content */}
+          <main className="lg:col-span-6">
+            <Card className="transition-all duration-300 border-border bg-card">
+              <CardContent className="p-6">
+                <div className="space-y-6">
+                  <div className="relative group">
+                    <Preview
+                      loading={loading}
+                      generatedSvg={generatedSvg}
+                      onDownload={handleDownload}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                  <div className="flex gap-4">
+                    <Button
+                      onClick={handleGenerateDiagram}
+                      disabled={loading}
+                      className="flex-1 bg-gradient-to-r from-primary to-accent hover:from-primary-hover hover:to-accent-hover text-primary-foreground transition-all duration-300 hover:scale-105"
+                    >
+                      <Wand2 className="w-5 h-5 ml-2" />
+                      {loading ? 'جاري الإنشاء...' : 'إنشاء المخطط'}
+                    </Button>
+                    {generatedSvg && (
+                      <Button
+                        onClick={handleDownload}
+                        className="bg-gradient-to-r from-success to-success-hover hover:from-success-hover hover:to-success text-success-foreground transition-all duration-300 hover:scale-105"
+                      >
+                        <Download className="w-5 h-5" />
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </main>
+
+          {/* Sidebar Left */}
+          <aside className="lg:col-span-3">
+            <Card className="sticky top-4 transition-all duration-300 hover:shadow-lg border-border bg-card">
+              <CardContent className="p-4">
+                <Accordion type="single" collapsible defaultValue="settings">
+                  <AccordionItem value="settings" className="border-none">
+                    <AccordionTrigger className="text-lg font-semibold hover:text-primary transition-colors">
+                      <Settings2 className="w-5 h-5 ml-2" />
+                      إعدادات المخطط
+                    </AccordionTrigger>
+                    <AccordionContent className="pt-4">
+                      <DiagramSettings
+                        diagramSettings={diagramSettings}
+                        handleSettingsChange={handleSettingsChange}
+                        selectedDiagramType={diagramType}
+                        theme={theme}
+                        setTheme={setTheme}
+                      />
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </CardContent>
+            </Card>
+          </aside>
+        </div>
       </div>
     </div>
-
-    <div className="container max-w-7xl mx-auto py-10 px-4 sm:px-6 relative">
-      {/* رأس الصفحة مع تأثيرات الحركة */}
-      <header className="mb-16 text-center animate-fade-in">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-slide-in
-                      bg-gradient-to-r from-primary via-accent to-info bg-clip-text text-transparent">
-          مولد المخططات
-        </h1>
-        <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto relative animate-slide-in">
-          قم بإنشاء مخططات احترافية باستخدام رسيم
-          <Sparkles className="w-5 h-5 text-warning absolute -top-2 -right-6 animate-bounce" />
-        </p>
-      </header>
-
-      {/* المحتوى الرئيسي مع تأثيرات الحركة */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 animate-scale-in">
-        {/* القائمة الجانبية */}
-        <aside className="order-2 lg:order-1 lg:col-span-4">
-          <div className="lg:sticky lg:top-8 space-y-6">
-            <div className="glass-effect card-float rounded-xl overflow-hidden">
-              <DiagramSidebar
-                diagramType={diagramType}
-                setDiagramType={setDiagramType}
-                theme={theme}
-                setTheme={setTheme}
-                diagramSettings={diagramSettings}
-                setDiagramSettings={setDiagramSettings}
-              />
-            </div>
-          </div>
-        </aside>
-
-        {/* المحتوى الرئيسي */}
-        <main className="order-1 lg:order-2 lg:col-span-8">
-          <div className="glass-effect card-float rounded-xl overflow-hidden">
-            <DiagramMainContent
-              basicInfo={basicInfo}
-              setBasicInfo={setBasicInfo}
-              diagramSettings={diagramSettings}
-              setDiagramSettings={setDiagramSettings}
-              selectedDiagramType={diagramType}
-              generatedSvg={generatedSvg}
-              loading={loading}
-              onGenerate={handleGenerateDiagram}
-              onDownload={handleDownload}
-            />
-          </div>
-        </main>
-      </div>
-    </div>
-  </div>
-);
-};
-
-export default DiagramBuilder;
+  );
+}

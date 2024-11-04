@@ -1,177 +1,165 @@
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  body {
-    font-family: 'Cairo', Arial, sans-serif;
+body {
+  font-family: 'Cairo', Arial, sans-serif;
+}
+
+@layer base {
+  ::selection {
+    @apply bg-blue-500/30 text-blue-900;
+  }
+  
+  ::-moz-selection {
+    @apply bg-blue-500/30 text-blue-900;
+  }
+  :root {
+    --move-x: 0px;
+    --move-y: 0px;
+
+    /* الألوان الأساسية - تم تخفيف درجة البياض */
+    --background: 217 25% 95%;
+    --foreground: 217 35% 15%;
+    
+    /* ألوان البطاقات */
+    --card: 217 25% 97%;
+    --card-foreground: 217 35% 15%;
+    --card-hover: 217 25% 93%;
+    
+    /* ألوان القوائم المنبثقة */
+    --popover: 217 25% 97%;
+    --popover-foreground: 217 35% 15%;
+    
+    /* الألوان الرئيسية */
+    --primary: 217 91% 60%;
+    --primary-hover: 217 91% 55%;
+    --primary-active: 217 91% 50%;
+    --primary-foreground: 217 25% 97%;
+    
+    /* الألوان الثانوية */
+    --secondary: 217 25% 92%;
+    --secondary-hover: 217 25% 88%;
+    --secondary-active: 217 25% 84%;
+    --secondary-foreground: 217 35% 15%;
+      
+    /* ألوان التأكيد */
+    --accent: 215 90% 60%;
+    --accent-hover: 215 90% 55%;
+    --accent-active: 215 90% 50%;
+    --accent-foreground: 217 25% 97%;
+    
+    /* ألوان الحالة */
+    --success: 142 72% 35%;
+    --success-hover: 142 72% 30%;
+    --success-foreground: 217 25% 97%;
+    
+    --warning: 38 92% 50%;
+    --warning-hover: 38 92% 45%;
+    --warning-foreground: 217 25% 97%;
+    
+    --info: 199 89% 48%;
+    --info-hover: 199 89% 43%;
+    --info-foreground: 217 25% 97%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-hover: 0 84% 55%;
+    --destructive-foreground: 217 25% 97%;
+    
+    /* ألوان الواجهة */
+    --muted: 217 25% 90%;
+    --muted-foreground: 217 25% 45%;
+    
+    /* ألوان العناصر */
+    --border: 217 25% 85%;
+    --input: 217 25% 85%;
+    --ring: 217 91% 60%;
+    
+    --radius: 0.875rem;
   }
 
-  @layer base {
-    /* تنسيق التحديد */
-    ::selection {
-      @apply bg-blue-500/30 text-blue-900;
-    }
+  .dark {
+    /* الألوان الأساسية */
+    --background: 217 65% 4%;
+    --foreground: 217 25% 97%;
     
-    ::-moz-selection {
-      @apply bg-blue-500/30 text-blue-900;
-    }
-
-    :root {
-
-      --move-x: 0px;
-  --move-y: 0px;
-
-      /* الألوان الأساسية */
-      --background: 217 65% 98%;
-      --foreground: 217 65% 12%;
-      
-      /* ألوان البطاقات */
-      --card: 0 0% 100%;
-      --card-foreground: 217 65% 12%;
-      --card-hover: 217 65% 96%;
-      
-      /* ألوان القوائم المنبثقة */
-      --popover: 0 0% 100%;
-      --popover-foreground: 217 65% 12%;
-      
-      /* الألوان الرئيسية */
-      --primary: 217 91% 60%;
-      --primary-hover: 217 91% 55%;
-      --primary-active: 217 91% 50%;
-      --primary-foreground: 0 0% 100%;
-      
-      /* الألوان الثانوية */
-      --secondary: 217 25% 85%; /* تغيير من 95% إلى 85% لجعله أغمق */
-    --secondary-hover: 217 25% 80%;
-    --secondary-active: 217 25% 75%;
-    --secondary-foreground: 217 65% 12%;
-      
-      /* ألوان التأكيد */
-      --accent: 215 90% 60%;
-      --accent-hover: 215 90% 55%;
-      --accent-active: 215 90% 50%;
-      --accent-foreground: 0 0% 100%;
-      
-      /* ألوان الحالة */
-      --success: 142 72% 29%;
-      --success-hover: 142 72% 26%;
-      --success-foreground: 0 0% 100%;
-      
-      --warning: 38 92% 50%;
-      --warning-hover: 38 92% 45%;
-      --warning-foreground: 0 0% 100%;
-      
-      --info: 199 89% 48%;
-      --info-hover: 199 89% 43%;
-      --info-foreground: 0 0% 100%;
-      
-      --destructive: 0 84% 60%;
-      --destructive-hover: 0 84% 55%;
-      --destructive-foreground: 0 0% 100%;
-      
-      /* ألوان الواجهة */
-      --muted: 217 25% 95%;
-      --muted-foreground: 217 25% 45%;
-      
-      /* ألوان العناصر */
-      --border: 217 35% 75%; /* تغيير اللون ليكون أغمق */
-      --input: 217 35% 75%;
-      --ring: 217 91% 60%;
-      
-      /* نصف قطر الحواف */
-      --radius: 0.875rem;
-    }
-
-    .dark {
-      /* الألوان الأساسية */
-      --background: 217 65% 4%;
-      --foreground: 217 65% 98%;
-      
-      /* ألوان البطاقات */
-      --card: 217 65% 6%;
-      --card-foreground: 217 65% 98%;
-      --card-hover: 217 35% 90%;
-      
-      /* ألوان القوائم المنبثقة */
-      --popover: 217 65% 6%;
-      --popover-foreground: 217 65% 98%;
-      
-      /* الألوان الرئيسية */
-      --primary: 217 91% 65%;
-      --primary-hover: 217 91% 60%;
-      --primary-active: 217 91% 55%;
-      --primary-foreground: 217 65% 4%;
-      
-      /* الألوان الثانوية */
-      --secondary: 217 25% 15%;
-      --secondary-hover: 217 25% 12%;
-      --secondary-active: 217 25% 10%;
-      --secondary-foreground: 217 65% 98%;
-      
-      /* ألوان التأكيد */
-      --accent: 215 90% 65%;
-      --accent-hover: 215 90% 60%;
-      --accent-active: 215 90% 55%;
-      --accent-foreground: 217 65% 4%;
-      
-      /* ألوان الحالة */
-      --success: 142 72% 35%;
-      --success-hover: 142 72% 32%;
-      --success-foreground: 217 65% 4%;
-      
-      --warning: 38 92% 60%;
-      --warning-hover: 38 92% 55%;
-      --warning-foreground: 217 65% 4%;
-      
-      --info: 199 89% 58%;
-      --info-hover: 199 89% 53%;
-      --info-foreground: 217 65% 4%;
-      
-      --destructive: 0 84% 65%;
-      --destructive-hover: 0 84% 60%;
-      --destructive-foreground: 217 65% 4%;
-      
-      /* ألوان الواجهة */
-      --muted: 217 25% 90%;
-      --muted-foreground: 217 25% 40%;
-      
-      /* ألوان العناصر */
-      --border: 217 25% 15%;
-      --input: 217 25% 15%;
-      --ring: 217 91% 65%;
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: translate(0, 0);
-      }
-      50% {
-        transform: translate(20px, -20px);
-      }
-    }
+    /* ألوان البطاقات */
+    --card: 217 65% 6%;
+    --card-foreground: 217 25% 97%;
+    --card-hover: 217 35% 8%;
     
-    /* حركة النقاط الدائرية */
-    @keyframes pulse-size {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.1);
-      }
-    }
+    /* ألوان القوائم المنبثقة */
+    --popover: 217 65% 6%;
+    --popover-foreground: 217 25% 97%;
     
-    /* تأثير التموج للدوائر */
-    @keyframes ripple {
-      0% {
-        transform: scale(0.8);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(2);
-        opacity: 0;
-      }
-    }
+    /* الألوان الرئيسية */
+    --primary: 217 91% 65%;
+    --primary-hover: 217 91% 60%;
+    --primary-active: 217 91% 55%;
+    --primary-foreground: 217 65% 4%;
     
+    /* الألوان الثانوية */
+    --secondary: 217 25% 15%;
+    --secondary-hover: 217 25% 12%;
+    --secondary-active: 217 25% 10%;
+    --secondary-foreground: 217 25% 97%;
+    
+    /* ألوان التأكيد */
+    --accent: 215 90% 65%;
+    --accent-hover: 215 90% 60%;
+    --accent-active: 215 90% 55%;
+    --accent-foreground: 217 65% 4%;
+    
+    /* ألوان الحالة */
+    --success: 142 72% 40%;
+    --success-hover: 142 72% 35%;
+    --success-foreground: 217 65% 4%;
+    
+    --warning: 38 92% 60%;
+    --warning-hover: 38 92% 55%;
+    --warning-foreground: 217 65% 4%;
+    
+    --info: 199 89% 58%;
+    --info-hover: 199 89% 53%;
+    --info-foreground: 217 65% 4%;
+    
+    --destructive: 0 84% 65%;
+    --destructive-hover: 0 84% 60%;
+    --destructive-foreground: 217 65% 4%;
+    
+    /* ألوان الواجهة */
+    --muted: 217 25% 20%;
+    --muted-foreground: 217 25% 60%;
+    
+    /* ألوان العناصر */
+    --border: 217 25% 15%;
+    --input: 217 25% 15%;
+    --ring: 217 91% 65%;
+  }
+
+  
+  
+  /* حركة النقاط الدائرية */
+  @keyframes pulse-size {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+  
+  /* تأثير التموج للدوائر */
+  @keyframes ripple {
+    0% {
+      transform: scale(0.8);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
     /* تطبيق الخصائص الأساسية */
     * {
       @apply border-border selection:bg-blue-500/30 selection:text-foreground;
