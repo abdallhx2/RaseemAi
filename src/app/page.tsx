@@ -135,7 +135,7 @@ export default function DiagramPage() {
             {/* Basic Info Card */}
             <Card className="transition-all duration-300 hover:shadow-lg border-border bg-card">
               <CardContent className="p-4">
-                <div className="flex items-center gap-2 mb-4 text-lg font-semibold text-primary">
+                <div className="flex items-center gap-2 mb-4 text-lg font-semibold ">
                   <Code2 className="w-5 h-5" />
                   معلومات أساسية
                 </div>
@@ -151,7 +151,7 @@ export default function DiagramPage() {
               <CardContent className="p-4">
                 <div className="flex items-center gap-2 mb-4">
                   <svg 
-                    className="w-5 h-5 text-accent" 
+                    className="w-5 h-5" 
                     fill="none" 
                     stroke="currentColor" 
                     viewBox="0 0 24 24"
@@ -163,7 +163,7 @@ export default function DiagramPage() {
                       d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
                     />
                   </svg>
-                  <h3 className="text-lg font-semibold text-primary">نوع المخطط</h3>
+                  <h3 className="text-lg font-semibold ">نوع المخطط</h3>
                 </div>
                 <div className="border-t border-border pt-4">
                   <DiagramSidebar
@@ -174,25 +174,7 @@ export default function DiagramPage() {
               </CardContent>
             </Card>
 
-            {/* Floating Help Button */}
-            <button className="fixed bottom-6 right-6 p-3 bg-primary hover:bg-primary-hover text-primary-foreground rounded-full shadow-lg transition-all duration-300 hover:scale-110 group">
-              <svg 
-                className="w-6 h-6" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <span className="absolute right-full mr-2 bg-popover text-popover-foreground text-sm py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                مساعدة
-              </span>
-            </button>
+          
           </aside>
 
           {/* Main Content */}

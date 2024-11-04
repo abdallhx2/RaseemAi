@@ -18,10 +18,14 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
-
 export const metadata: Metadata = {
-  title: "منشئ المخططات - Diagram Builder",
+  title: "Raseem",
   description: "أداة ذكية لإنشاء المخططات باستخدام الذكاء الاصطناعي",
+  icons: {
+    icon: '/favicon.svg' 
+  
+    
+  }
 };
 
 export default function RootLayout({

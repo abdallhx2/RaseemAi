@@ -24,7 +24,7 @@ export const Preview: React.FC<PreviewProps> = ({ loading, generatedSvg, onDownl
         <CardContent>
           <div className="space-y-4">
             {loading ? (
-              <div className="flex items-center justify-center h-[640px] w-full">
+              <div className="flex items-center justify-center h-[505px] w-full">
                 <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent" />
               </div>
             ) : generatedSvg ? (
@@ -33,7 +33,7 @@ export const Preview: React.FC<PreviewProps> = ({ loading, generatedSvg, onDownl
 
                 {/* منطقة العرض */}
                 
-                <div className="relative w-full h-[640px] border rounded-lg bg-background/50">
+                <div className="relative w-full h-[505px] border rounded-lg bg-background/50">
                   <div 
                     dangerouslySetInnerHTML={{ __html: generatedSvg }}
                     className="absolute inset-0 p-4 overflow-auto flex items-center justify-center"
@@ -47,7 +47,7 @@ export const Preview: React.FC<PreviewProps> = ({ loading, generatedSvg, onDownl
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center h-[640px] border-2 border-dashed rounded-lg bg-muted/5">
+              <div className="flex flex-col items-center justify-center h-[505px] border-2 border-dashed rounded-lg bg-muted/5">
                 <FileImage className="w-12 h-12 text-muted-foreground mb-4" />
                 <p className="text-muted-foreground">لم يتم إنشاء أي مخطط بعد</p>
               </div>

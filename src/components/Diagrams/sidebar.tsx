@@ -24,23 +24,22 @@ export const DiagramSidebar: React.FC<DiagramSidebarProps> = ({
   setDiagramType,
 }) => {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-lg font-semibold text-right">نوع المخطط</CardTitle>
-      </CardHeader>
-      <CardContent className="grid gap-2">
-        {diagramTypes.map((type) => (
-          <Button
-            key={type.id}
-            variant={diagramType === type.id ? "secondary" : "ghost"}
-            className="w-full justify-start gap-2 text-right"
-            onClick={() => setDiagramType(type.id as DiagramType)}
-          >
-            <type.icon className="w-4 h-4" />
-            <span>{type.name}</span>
-          </Button>
-        ))}
-      </CardContent>
-    </Card>
+    <Card className="border-none shadow-none bg-transparent">
+    <CardContent className="grid gap-2">
+      {diagramTypes.map((type) => (
+        <Button
+          key={type.id}
+          variant={diagramType === type.id ? "secondary" : "ghost"}
+          className="w-full justify-start gap-2 text-right"
+          onClick={() => setDiagramType(type.id as DiagramType)}
+        >
+          <type.icon className="w-4 h-4" />
+          <span>{type.name}</span>
+        </Button>
+      ))}
+    </CardContent>
+  </Card>
+  
+  
   );
 };

@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import profilePic from '@/public/12.jpg'
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
