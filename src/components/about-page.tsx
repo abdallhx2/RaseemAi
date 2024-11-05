@@ -51,7 +51,7 @@ const AboutPage = () => {
               <div className="absolute inset-2 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 dark:from-blue-900/20 dark:to-blue-900/10" />
               <div className="absolute inset-2 rounded-full overflow-hidden border-2 border-primary/20">
                 <Image
-                  src="/12.jpg"
+                  src="12.jpg"
                   alt="عبدالله الحسني"
                   fill
                   className="rounded-full object-cover transition-transform duration-300 hover:scale-110"
