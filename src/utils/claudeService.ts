@@ -117,12 +117,12 @@ export const generateDiagram = async (
    Use Just English text, comments.
    Example template:
    ${DIAGRAM_TEMPLATES[diagramType]}
-   Return only Mermaid code, max 50 lines.`;
+   Return only Mermaid code, max 100 lines.`;
    
       const msg = await anthropic.messages.create({
         model: 'claude-3-sonnet-20240229',
-        max_tokens: 1000, // تقليل الحد الأقصى للـ tokens
-        temperature: 0.4, // زيادة الإبداع لتوليد مخططات مختصرة
+        max_tokens: 350, // تقليل الحد الأقصى للـ tokens
+        temperature: 0.1, // زيادة الإبداع لتوليد مخططات مختصرة
         messages: [{ role: 'user', content: prompt }]
       });
    
