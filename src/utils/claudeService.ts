@@ -102,31 +102,6 @@ export const DIAGRAM_TEMPLATES = {
 };
 
 
-// إعداد قالب المخطط بناءً على نوع المخطط ومعلومات النظام
-const prepareTemplatePrompt = (
-  diagramType: DiagramType, 
-  basicInfo: BasicInfo
-): string => {
-  const baseTemplate = DIAGRAM_TEMPLATES[diagramType];
-  return `Here's a template for reference:
-${baseTemplate}
-
-Please create a similar ${diagramType} diagram for the system "${basicInfo.systemName}" 
-considering its description and requirements. Use Arabic text where appropriate.`;
-};
-
-// تحليل وصف النظام لاستخراج الكيانات والعلاقات الرئيسية
-const analyzeSystemDescription = (description: string): string => {
-  return `Based on the system description:
-"${description}"
-
-Please identify and include these aspects in the diagram:
-1. Main entities/components mentioned
-2. Key relationships and interactions
-3. Important processes and workflows
-4. States and transitions (if applicable)
-5. Any specific business rules or constraints mentioned`;
-};
 
 
 export const generateDiagram = async (
@@ -142,11 +117,11 @@ export const generateDiagram = async (
    Use Just English text, comments.
    Example template:
    ${DIAGRAM_TEMPLATES[diagramType]}
-   Return only Mermaid code, max 20 lines.`;
+   Return only Mermaid code, max 50 lines.`;
    
       const msg = await anthropic.messages.create({
         model: 'claude-3-sonnet-20240229',
-        max_tokens: 300, // تقليل الحد الأقصى للـ tokens
+        max_tokens: 1000, // تقليل الحد الأقصى للـ tokens
         temperature: 0.4, // زيادة الإبداع لتوليد مخططات مختصرة
         messages: [{ role: 'user', content: prompt }]
       });

@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Slider } from '@/components/ui/slider';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { DiagramSettings as DiagramSettingsType, DiagramType, MermaidTheme } from '@/utils/types';
 import { diagramConfigs } from '@/utils/diagram-configs';
 
@@ -50,12 +50,36 @@ export const DiagramSettings: React.FC<DiagramSettingsProps> = ({
               <SelectTrigger>
                 <SelectValue placeholder="اختر السمة" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="default">افتراضي</SelectItem>
-                <SelectItem value="dark">داكن</SelectItem>
-                <SelectItem value="forest">غابة</SelectItem>
-                <SelectItem value="neutral">محايد</SelectItem>
-              </SelectContent>
+             <SelectContent>
+  {/* السمات الأساسية */}
+  <SelectGroup>
+    <SelectLabel>السمات الأساسية</SelectLabel>
+    <SelectItem value="default">افتراضي</SelectItem>
+    <SelectItem value="dark">داكن</SelectItem>
+    <SelectItem value="neutral">محايد</SelectItem>
+  </SelectGroup>
+
+  {/* سمات الطبيعة */}
+  <SelectGroup>
+    <SelectLabel>سمات الطبيعة</SelectLabel>
+    <SelectItem value="forest">غابة</SelectItem>
+    <SelectItem value="ocean">محيط</SelectItem>
+    <SelectItem value="sunset">غروب</SelectItem>
+    <SelectItem value="mint">نعناعي</SelectItem>
+    <SelectItem value="olive">زيتوني</SelectItem>
+    <SelectItem value="autumn">خريف</SelectItem>
+  </SelectGroup>
+
+  {/* سمات ملونة */}
+  <SelectGroup>
+    <SelectLabel>سمات ملونة</SelectLabel>
+    <SelectItem value="purple">بنفسجي</SelectItem>
+    <SelectItem value="rose">وردي</SelectItem>
+    <SelectItem value="coffee">قهوة</SelectItem>
+    <SelectItem value="night">ليلي</SelectItem>
+    <SelectItem value="tech">تقني</SelectItem>
+  </SelectGroup>
+</SelectContent>
             </Select>
           </div>
 

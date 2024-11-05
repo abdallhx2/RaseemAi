@@ -22,7 +22,7 @@ export function NavigationBar() {
         {/* الأزرار */}
         <div className="flex items-center gap-3">
       
-        <Link href="/about-page">
+        <Link href="/about">
   <Button 
       variant="outline"
 

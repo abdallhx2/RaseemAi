@@ -1,8 +1,7 @@
 "use client";
 
+import React from 'react';
 import Image from "next/image";
-import profilePic from '@/public/12.jpg'
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -39,66 +38,25 @@ const experienceCards = [
 
 const skills = ["Next.js", "Dart", "TypeScript", "Flutter"];
 
-const SocialLinks = () => {
-  const socialLinks = [
-    { 
-      icon: Github, 
-      label: "GitHub",
-      href: "https://github.com/yourusername"
-    },
-    { 
-      icon: Twitter, 
-      label: "Twitter",
-      href: "https://twitter.com/yourusername" 
-    },
-    { 
-      icon: Linkedin, 
-      label: "LinkedIn",
-      href: "https://linkedin.com/in/yourusername"
-    },
-    { 
-      icon: Mail, 
-      label: "البريد الإلكتروني",
-      href: "mailto:your.email@example.com"
-    }
-  ];
-
-  return (
-    <div className="flex flex-wrap justify-center gap-4">
-      {socialLinks.map(({ icon: Icon, label, href }, index) => (
-        <Button 
-          key={index}
-          variant="ghost" 
-          className="gap-2 transition-transform hover:scale-105"
-        >
-          <Icon className="w-4 h-4" />
-          {label}
-        </Button>
-      ))}
-    </div>
-  );
-};
-
-export default function AboutPage() {
+const AboutPage = () => {
   return (
     <main className="min-h-screen py-10">
       <div className="container max-w-4xl mx-auto px-4">
         {/* القسم الرئيسي - الصورة والمعلومات */}
         <section className="mb-16">
-          {/* الصورة الشخصية - دائماً في الأعلى على الجوال */}
+          {/* الصورة الشخصية */}
           <div className="mb-8 flex justify-center">
             <div className="relative w-[200px] h-[200px] md:w-[280px] md:h-[280px]">
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 to-primary/10 animate-pulse" />
               <div className="absolute inset-2 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 dark:from-blue-900/20 dark:to-blue-900/10" />
               <div className="absolute inset-2 rounded-full overflow-hidden border-2 border-primary/20">
-              <Image
-  src="/12.jpg"
-  alt="عبدالله الحسني"
-  width={300}
-  height={300}
-  className="rounded-full object-cover transition-transform duration-300 hover:scale-110"
-  priority
-/>
+                <Image
+                  src="/12.jpg"
+                  alt="عبدالله الحسني"
+                  fill
+                  className="rounded-full object-cover transition-transform duration-300 hover:scale-110"
+                  priority
+                />
               </div>
             </div>
           </div>
@@ -130,8 +88,6 @@ export default function AboutPage() {
               مطور برمجيات متخصص في تطوير واجهات المستخدم وبناء تجارب مستخدم استثنائية.
               أسعى دائماً لتطوير حلول مبتكرة وفعالة تجمع بين الأداء العالي والتصميم السلس.
             </p>
-
-         
           </div>
         </section>
 
@@ -167,30 +123,32 @@ export default function AboutPage() {
 
         {/* وسائل التواصل */}
         <section>
-  <Card className="p-6 bg-primary/5 hover:bg-primary/10 transition-colors">
-    <div className="flex flex-wrap justify-center gap-4">
-      {[
-        { icon: Github, label: "GitHub", href: "https://github.com/abdallhx2" },
-        { icon: Twitter, label: "X", href: "https://x.com/01DMXX" },
-        { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/abdullahx2" },
-        { icon: Mail, label: "البريد الإلكتروني", href: "mailto:3bdallhx2@gmail.com" }
-      ].map(({ icon: Icon, label, href }, index) => (
-        <Button 
-          key={index}
-          variant="ghost" 
-          className="gap-2 transition-transform hover:scale-105"
-          asChild
-        >
-          <a href={href} target="_blank" rel="noopener noreferrer">
-            <Icon className="w-4 h-4" />
-            {label}
-          </a>
-        </Button>
-      ))}
-    </div>
-  </Card>
-</section>
+          <Card className="p-6 bg-primary/5 hover:bg-primary/10 transition-colors">
+            <div className="flex flex-wrap justify-center gap-4">
+              {[
+                { icon: Github, label: "GitHub", href: "https://github.com/abdallhx2" },
+                { icon: Twitter, label: "X", href: "https://x.com/01DMXX" },
+                { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/abdullahx2" },
+                { icon: Mail, label: "البريد الإلكتروني", href: "mailto:3bdallhx2@gmail.com" }
+              ].map(({ icon: Icon, label, href }, index) => (
+                <Button 
+                  key={index}
+                  variant="ghost" 
+                  className="gap-2 transition-transform hover:scale-105"
+                  asChild
+                >
+                  <a href={href} target="_blank" rel="noopener noreferrer">
+                    <Icon className="w-4 h-4" />
+                    {label}
+                  </a>
+                </Button>
+              ))}
+            </div>
+          </Card>
+        </section>
       </div>
     </main>
   );
-}
+};
+
+export default AboutPage;

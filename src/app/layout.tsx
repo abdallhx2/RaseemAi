@@ -5,6 +5,7 @@ import { NavigationBar } from "@/components/navigation-bar";
 import { Footer } from "@/components/footer";
 import { Toaster } from "@/components/ui/toaster";
 import { Background } from "@/components/Background";
+import { Analytics } from "@vercel/analytics/react"
 import "./globals.css";
 
 const geistSans = localFont({
@@ -55,6 +56,7 @@ export default function RootLayout({
 
           <Footer />
           <Toaster />
+          <Analytics /> {/* إضافة مكون Analytics هنا */}
         </ThemeProvider>
       </body>
     </html>
